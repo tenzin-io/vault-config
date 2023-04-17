@@ -30,5 +30,5 @@ A Terraform configuration repository to manage my Vault server.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_admin_password"></a> [admin\_password](#input\_admin\_password) | The Vault admin password | `string` | n/a | yes |
+| <a name="input_vault_admin_password"></a> [vault\_admin\_password](#input\_vault\_admin\_password) | The Vault admin password | `string` | n/a | yes |
 <!-- END_TF_DOCS -->
