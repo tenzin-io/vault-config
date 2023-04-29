@@ -15,7 +15,7 @@ variable "github_actions_bound_issuer" {
 
 variable "allowed_github_repos" {
   type = map(object({
-    claim          = string
+    claims         = map(string)
     token_policies = list(string)
   }))
   default     = {}
