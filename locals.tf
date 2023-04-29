@@ -1,5 +1,11 @@
 locals {
   allowed_github_repos = {
+    "ubuntu-actions-runner-image" = {
+      claims = {
+        "repository" = "tenzin-io/ubuntu-actions-runner-image"
+      }
+      token_policies = [vault_policy.read_secrets.name]
+    }
     "nvidia-actions-runner-image" = {
       claims = {
         "repository" = "tenzin-io/nvidia-actions-runner-image"
