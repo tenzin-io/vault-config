@@ -1,4 +1,4 @@
-path "${secrets_engine_mount_path}/*" {
+path "${mount_path}/*" {
   capabilities = ["list", "read"]
 }
 

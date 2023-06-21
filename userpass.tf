@@ -1,16 +1,6 @@
-
-#
-# Auth methods
-#
 resource "vault_auth_backend" "userpass" {
   type = "userpass"
 }
-
-resource "vault_policy" "vault_admin" {
-  name   = "vault-admin"
-  policy = file("${path.module}/files/vault_admin_policy.hcl")
-}
-
 
 resource "vault_generic_endpoint" "vault_admin" {
   depends_on           = [vault_auth_backend.userpass]
@@ -25,3 +15,7 @@ resource "vault_generic_endpoint" "vault_admin" {
     EOT
 }
 
+resource "vault_policy" "vault_admin" {
+  name   = "vault-admin"
+  policy = file("${path.module}/files/vault_admin_policy.hcl")
+}
