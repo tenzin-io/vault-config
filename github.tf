@@ -14,8 +14,12 @@ resource "vault_kv_secret_backend_v2" "github" {
   cas_required = false
 }
 
+locals {
+  secret_paths = ["cloudflare", "artifactory"]
+}
+
 resource "vault_policy" "github" {
-  for_each = toset(["cloudflare", "artifactory"])
+  for_each = toset(local.secret_paths)
   name     = "github-policy-${each.value}"
   policy = templatefile("${path.module}/files/github_secrets_policy.hcl", {
     mount_path = "${vault_mount.github.path}/${each.value}"
@@ -32,11 +36,11 @@ resource "vault_jwt_auth_backend" "github" {
   bound_issuer       = "https://token.actions.githubusercontent.com"
 }
 
-resource "vault_jwt_auth_backend_role" "actions_runner" {
+resource "vault_jwt_auth_backend_role" "github_actions" {
   for_each          = { for i, r in var.allowed_github_repos : r.claims.repository => r }
   backend           = vault_jwt_auth_backend.github.path
   role_name         = "actions-runner-role-${md5(each.key)}"
-  token_policies    = [for i, p in each.value.policies : format("github-policy-%s", p)]
+  token_policies    = [for i, s in each.value.secret_paths : format("github-policy-%s", s)]
   bound_claims      = each.value.claims
   bound_claims_type = "glob"
   user_claim        = "sub"
