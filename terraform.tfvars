@@ -1,24 +1,24 @@
 allowed_github_repos = [
   {
-    policies = ["artifactory"],
+    secret_paths = ["artifactory"],
     claims = {
       "repository" = "tenzin-io/ubuntu-actions-runner-image"
     }
   },
   {
-    policies = ["artifactory"],
+    secret_paths = ["artifactory"],
     claims = {
       "repository" = "tenzin-io/nvidia-actions-runner-image"
     }
   },
   {
-    policies = ["cloudflare"],
+    secret_paths = ["cloudflare"],
     claims = {
       "repository" = "tenzin-io/cloudflare-dns"
     }
   },
   {
-    policies = ["cloudflare"],
+    secret_paths = ["cloudflare"],
     claims = {
       "repository" = "tenzin-io/homelab-k8s-nvidia"
     }
