@@ -1,3 +1,7 @@
+path "${mount_path}" {
+  capabilities = ["list", "read"]
+}
+
 path "${mount_path}/*" {
   capabilities = ["list", "read"]
 }
