@@ -42,7 +42,7 @@ resource "vault_jwt_auth_backend_role" "github_actions" {
   role_name         = "actions-runner-role-${md5(each.key)}"
   token_policies    = [for i, s in each.value.secret_paths : format("github-policy-%s", s)]
   bound_claims      = each.value.claims
-  bound_claims_type = "glob"
+  bound_claims_type = "string"
   user_claim        = "sub"
   role_type         = "jwt"
 }
