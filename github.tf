@@ -22,7 +22,8 @@ resource "vault_policy" "github" {
   for_each = toset(local.secret_paths)
   name     = "github-policy-${each.value}"
   policy = templatefile("${path.module}/files/github_secrets_policy.hcl", {
-    mount_path = "${vault_mount.github.path}/${each.value}"
+    mount_path  = vault_mount.github.path
+    secret_path = each.value
   })
 }
 

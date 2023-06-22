@@ -1,8 +1,8 @@
-path "${mount_path}" {
+path "${mount_path}/data/${secret_path}" {
   capabilities = ["list", "read"]
 }
 
-path "${mount_path}/*" {
+path "${mount_path}/metadata/${secret_path}" {
   capabilities = ["list", "read"]
 }
 
