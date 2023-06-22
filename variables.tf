@@ -1,12 +1,14 @@
 variable "vault_admin_password" {
   type        = string
   sensitive   = true
-  description = "The Vault admin password"
+  description = "The Vault admin password."
 }
 
 variable "allowed_github_repos" {
   type = list(object({
-    claims       = map(string)
+    claims = object({
+      repository = string
+    })
     secret_paths = list(string)
   }))
   default     = []
