@@ -1,26 +1,8 @@
-allowed_github_repos = [
-  {
-    secret_paths = ["artifactory"],
-    claims = {
-      "repository" = "tenzin-io/ubuntu-actions-runner-image"
-    }
-  },
-  {
-    secret_paths = ["artifactory"],
-    claims = {
-      "repository" = "tenzin-io/nvidia-actions-runner-image"
-    }
-  },
-  {
-    secret_paths = ["cloudflare"],
-    claims = {
-      "repository" = "tenzin-io/cloudflare-dns"
-    }
-  },
-  {
-    secret_paths = ["cloudflare"],
-    claims = {
-      "repository" = "tenzin-io/homelab-k8s-nvidia"
-    }
-  }
-]
+github_secret_mount_path = "github"
+
+github_repo_to_secret_paths = {
+  "tenzin-io/ubuntu-actions-runner-image" = ["artifactory"],
+  "tenzin-io/nvidia-actions-runner-image" = ["artifactory"],
+  "tenzin-io/cloudflare-dns"              = ["cloudflare"],
+  "tenzin-io/homelab-k8s-nvidia"          = ["cloudflare"]
+}

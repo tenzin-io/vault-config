@@ -8,7 +8,7 @@ A Terraform configuration repository to manage my Vault server.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_vault"></a> [vault](#provider\_vault) | 3.16.0 |
+| <a name="provider_vault"></a> [vault](#provider\_vault) | 3.17.0 |
 
 ## Resources
 
@@ -27,6 +27,7 @@ A Terraform configuration repository to manage my Vault server.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_allowed_github_repos"></a> [allowed\_github\_repos](#input\_allowed\_github\_repos) | A list of allowed GitHub repos via the JWT auth method. | <pre>list(object({<br>    claims = object({<br>      repository = string<br>    })<br>    secret_paths = list(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_github_repo_to_secret_paths"></a> [github\_repo\_to\_secret\_paths](#input\_github\_repo\_to\_secret\_paths) | A map of GitHub repo to allowed secret paths | `map(list(string))` | `{}` | no |
+| <a name="input_github_secret_mount_path"></a> [github\_secret\_mount\_path](#input\_github\_secret\_mount\_path) | The secret store mount path | `string` | `"github"` | no |
 | <a name="input_vault_admin_password"></a> [vault\_admin\_password](#input\_vault\_admin\_password) | The Vault admin password. | `string` | n/a | yes |
 <!-- END_TF_DOCS -->

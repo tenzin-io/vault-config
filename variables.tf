@@ -4,13 +4,14 @@ variable "vault_admin_password" {
   description = "The Vault admin password."
 }
 
-variable "allowed_github_repos" {
-  type = list(object({
-    claims = object({
-      repository = string
-    })
-    secret_paths = list(string)
-  }))
-  default     = []
-  description = "A list of allowed GitHub repos via the JWT auth method."
+variable "github_secret_mount_path" {
+  type        = string
+  description = "The secret store mount path"
+  default     = "github"
+}
+
+variable "github_repo_to_secret_paths" {
+  type        = map(list(string))
+  default     = {}
+  description = "A map of GitHub repo to allowed secret paths under the github_secret_mount_path"
 }
