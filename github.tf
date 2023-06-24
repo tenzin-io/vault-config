@@ -37,7 +37,7 @@ resource "vault_jwt_auth_backend_role" "github_actions" {
   for_each       = var.github_repo_to_secret_paths
   backend        = vault_jwt_auth_backend.github.path
   role_name      = "actions-runner-role-${md5(each.key)}"
-  token_policies = [for p in each.value : format("github-policy-%s", p)]
+  token_policies = [for p in each.value : format("github-policy-%s", md5(p))]
   bound_claims = {
     repository = each.key
   }
