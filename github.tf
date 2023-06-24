@@ -16,7 +16,7 @@ resource "vault_kv_secret_backend_v2" "github" {
 
 resource "vault_policy" "github" {
   for_each = toset(flatten([for k, v in var.github_repo_to_secret_paths : v]))
-  name     = "github-policy-${each.value}"
+  name     = "github-policy-${md5(each.value)}"
   policy = templatefile("${path.module}/files/github_secrets_policy.hcl", {
     mount_path  = vault_mount.github.path
     secret_path = each.value
