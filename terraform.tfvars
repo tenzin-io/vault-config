@@ -1,3 +1,5 @@
+ssh_secret_mount_path = "ssh"
+
 github_secret_mount_path = "github"
 
 github_repo_to_secret_paths = {
