@@ -2,7 +2,7 @@
 # Secrets store for GitHub repos 
 #
 resource "vault_mount" "github" {
-  path        = var.github_secret_mount_path
+  path        = "github"
   type        = "kv"
   options     = { version = "2" }
   description = "Secret store for GitHub repositories"
