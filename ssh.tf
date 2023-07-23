@@ -11,7 +11,7 @@ resource "vault_ssh_secret_backend_ca" "ssh" {
 
 resource "vault_ssh_secret_backend_role" "admin" {
   name                    = "admin"
-  allowed_users           = "admin"
+  allowed_users           = "root"
   default_user            = "root"
   ttl                     = "8h"
   backend                 = vault_mount.ssh.path
