@@ -9,10 +9,11 @@ resource "vault_ssh_secret_backend_ca" "ssh" {
   generate_signing_key = true
 }
 
-resource "vault_ssh_secret_backend_role" "root" {
-  name                    = "root-role"
-  allowed_users           = "root"
-  default_user            = "root"
+resource "vault_ssh_secret_backend_role" "ssh_user" {
+  for_each                = toset(distinct(flatten([for k, v in var.github_repos : v.ssh_users])))
+  name                    = "${each.value}-role"
+  allowed_users           = each.value
+  default_user            = each.value
   ttl                     = "4h"
   backend                 = vault_mount.ssh.path
   key_type                = "ca"

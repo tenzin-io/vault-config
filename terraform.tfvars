@@ -7,7 +7,8 @@ github_repos = {
     secrets = ["secrets/data/cloudflare"]
   }
   "tenzin-io/homelab-artifactory" = {
-    secrets = ["secrets/data/artifactory/admin"]
+    secrets   = ["secrets/data/artifactory/admin"]
+    ssh_users = ["root"]
   }
   "tenzin-io/homelab-k8s-v1" = {
     secrets = ["secrets/data/cloudflare", "secrets/data/tailscale", "secrets/data/github_app", "secrets/data/homelab-k8s-v1"]
