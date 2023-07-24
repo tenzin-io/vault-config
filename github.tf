@@ -14,8 +14,8 @@ resource "vault_jwt_auth_backend_role" "github_repos" {
   role_name = "actions-runner-role-${md5(each.key)}"
   token_policies = flatten([
     vault_policy.default_policy.name,
-    [for p in each.value.secrets : format("github-repo-to-secret-policy-%s", p)],
-    [for s in each.value.ssh_users : format("github-repo-to-ssh-user-policy-%s", s)],
+    each.value.secrets == null ? [] : [for p in each.value.secrets : format("github-repo-to-secret-policy-%s", p)],
+    each.value.ssh_users == null ? [] : [for s in each.value.ssh_users : format("github-repo-to-ssh-user-policy-%s", s)],
   ])
   bound_claims = {
     repository = each.key
