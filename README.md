@@ -29,5 +29,5 @@ A Terraform configuration repository to manage my Vault server.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_github_repos"></a> [github\_repos](#input\_github\_repos) | A map of GitHub repo to its allowed secret paths under the github secret store | <pre>map(object({<br>    secrets   = optional(list(string), [])<br>    ssh_users = optional(list(string), [])<br>  }))</pre> | `{}` | no |
-| <a name="input_vault_admin_password"></a> [vault\_admin\_password](#input\_vault\_admin\_password) | The Vault admin password | `string` | n/a | yes |
+| <a name="input_vault_admin_password"></a> [vault\_admin\_password](#input\_vault\_admin\_password) | The password to configure for Vault admin user | `string` | n/a | yes |
 <!-- END_TF_DOCS -->

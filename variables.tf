@@ -1,7 +1,7 @@
 variable "vault_admin_password" {
   type        = string
   sensitive   = true
-  description = "The Vault admin password"
+  description = "The password to configure for Vault admin user"
 }
 
 variable "github_repos" {
