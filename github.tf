@@ -12,7 +12,7 @@ resource "vault_jwt_auth_backend_role" "github_repos" {
   for_each       = var.github_repos
   backend        = vault_jwt_auth_backend.github.path
   role_name      = "actions-runner-role-${each.key}"
-  token_policies = flatten([vault_policy.default_policy.hcl, [for p in each.value.secrets : format("github-repo-to-secrets-policy-%s", p)]])
+  token_policies = flatten([vault_policy.default_policy.name, [for p in each.value.secrets : format("github-repo-to-secrets-policy-%s", p)]])
   bound_claims = {
     repository = each.key
   }
