@@ -17,5 +17,12 @@ resource "vault_generic_endpoint" "vault_admin" {
 
 resource "vault_policy" "vault_admin" {
   name   = "vault-admin"
-  policy = file("${path.module}/files/vault_admin_policy.hcl")
+  policy = data.vault_policy_document.vault_admin
+}
+
+data "vault_policy_document" "vault_admin" {
+  rule {
+    path         = "*"
+    capabilities = ["create", "read", "update", "delete", "list"]
+  }
 }

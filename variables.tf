@@ -4,8 +4,11 @@ variable "vault_admin_password" {
   description = "The Vault admin password"
 }
 
-variable "github_repo_to_secret_paths" {
-  type        = map(list(string))
+variable "github_repos" {
+  type = map(object({
+    secrets  = optional(list(string))
+    ssh_role = optional(list(string))
+  }))
   default     = {}
   description = "A map of GitHub repo to its allowed secret paths under the github secret store"
 }

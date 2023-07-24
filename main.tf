@@ -10,3 +10,15 @@ terraform {
 provider "vault" {
   address = "https://vault.tenzin.io"
 }
+
+resource "vault_policy" "default_policy" {
+  name   = "default-policy"
+  policy = data.vault_policy_document.default_policy
+}
+
+data "vault_policy_document" "default_policy" {
+  rule {
+    path         = "auth/token/create"
+    capabilities = ["create", "read", "update", "list"]
+  }
+}
