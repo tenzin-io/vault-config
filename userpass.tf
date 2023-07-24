@@ -17,7 +17,7 @@ resource "vault_generic_endpoint" "vault_admin" {
 
 resource "vault_policy" "vault_admin" {
   name   = "vault-admin"
-  policy = data.vault_policy_document.vault_admin
+  policy = data.vault_policy_document.vault_admin.hcl
 }
 
 data "vault_policy_document" "vault_admin" {

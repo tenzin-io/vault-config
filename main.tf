@@ -13,7 +13,7 @@ provider "vault" {
 
 resource "vault_policy" "default_policy" {
   name   = "default-policy"
-  policy = data.vault_policy_document.default_policy
+  policy = data.vault_policy_document.default_policy.hcl
 }
 
 data "vault_policy_document" "default_policy" {
