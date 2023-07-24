@@ -10,12 +10,15 @@ resource "vault_ssh_secret_backend_ca" "ssh" {
 }
 
 resource "vault_ssh_secret_backend_role" "ssh_user" {
-  for_each                = toset(distinct(flatten([for k, v in var.github_repos : v.ssh_users])))
-  name                    = "${each.value}-role"
-  allowed_users           = each.value
-  default_user            = each.value
-  ttl                     = "14400"
-  backend                 = vault_mount.ssh.path
-  key_type                = "ca"
+  for_each      = toset(distinct(flatten([for k, v in var.github_repos : v.ssh_users])))
+  name          = "${each.value}-role"
+  allowed_users = each.value
+  default_user  = each.value
+  ttl           = "14400"
+  backend       = vault_mount.ssh.path
+  key_type      = "ca"
+  default_extensions = {
+    "permit-pty" = ""
+  }
   allow_user_certificates = true
 }
