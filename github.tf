@@ -8,7 +8,7 @@ resource "vault_jwt_auth_backend" "github" {
   bound_issuer       = "https://token.actions.githubusercontent.com"
 }
 
-resource "vault_jwt_auth_backend_role" "github_repos" {
+resource "vault_jwt_auth_backend_role" "github_repo" {
   for_each  = var.github_repos
   backend   = vault_jwt_auth_backend.github.path
   role_name = "actions-runner-role-${md5(each.key)}"
@@ -35,7 +35,7 @@ resource "vault_policy" "github_repo_to_secret" {
   EOT
 }
 
-resource "vault_policy" "github_repo_to_ssh_users" {
+resource "vault_policy" "github_repo_to_ssh_user" {
   for_each = toset(distinct(compact(flatten([for k, v in var.github_repos : v.ssh_users]))))
   name     = "github-repo-to-ssh-user-policy-${each.value}"
   policy   = <<-EOT
