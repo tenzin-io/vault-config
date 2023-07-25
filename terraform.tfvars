@@ -11,12 +11,12 @@ github_repos = {
     ssh_users = ["root"]
   }
   "tenzin-io/homelab-k8s-v1" = {
-    secrets = ["secrets/data/cloudflare", "secrets/data/tailscale", "secrets/data/github_app", "secrets/data/homelab-k8s-v1"]
+    secrets = ["secrets/data/cloudflare", "secrets/data/tailscale", "secrets/data/github_app", "secrets/data/kubeconfig/homelab-k8s-v1"]
   }
   "tenzin-io/homelab-k8s-nvidia" = {
-    secrets = ["secrets/data/cloudflare", "secrets/data/github_app", "secrets/data/homelab-k8s-nvidia"]
+    secrets = ["secrets/data/cloudflare", "secrets/data/github_app", "secrets/data/kubeconfig/homelab-k8s-nvidia"]
   }
   "tenzin-io/homelab-k8s-oracle" = {
-    secrets = ["secrets/data/cloudflare", "secrets/data/github_app", "secrets/data/homelab-k8s-oracle"]
+    secrets = ["secrets/data/cloudflare", "secrets/data/github_app", "secrets/data/kubeconfig/homelab-k8s-oracle"]
   }
 }
