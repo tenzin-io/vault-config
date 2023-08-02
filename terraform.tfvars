@@ -1,5 +1,8 @@
 
 github_repos = {
+  "tenzin-io/setup-control-machine" = {
+    ssh_user = ["sysuer"]
+  }
   "tenzin-io/actions-runner-images" = {
     secrets = ["secrets/data/artifactory/tenzin-bot"]
   }
