@@ -1,6 +1,6 @@
 
 github_repos = {
-  "tenzin-io/setup-control-machine" = {
+  "tenzin-io/setup-machines" = {
     ssh_users = ["sysuser"]
   }
   "tenzin-io/actions-runner-images" = {
