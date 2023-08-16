@@ -14,7 +14,7 @@ resource "vault_ssh_secret_backend_role" "ssh_user" {
   name          = "${each.value}-role"
   allowed_users = each.value
   default_user  = each.value
-  ttl           = "3600"
+  ttl           = "14400"
   backend       = vault_mount.ssh.path
   key_type      = "ca"
   default_extensions = {
