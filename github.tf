@@ -30,7 +30,7 @@ resource "vault_policy" "github_repo_to_secret" {
   name     = "github-repo-to-secret-policy-${each.value}"
   policy   = <<-EOT
     path "${each.value}" {
-      capabilities = ["read"]
+      capabilities = ["create", "read", "update", "patch", "delete", "list"]
     }
   EOT
 }
