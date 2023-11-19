@@ -3,8 +3,9 @@ github_repos = {
   "tenzin-io/ansible-setup-homelab" = {
     ssh_users = ["packer"]
     secrets = [
-      "secrets/data/kubeconfig/homelab-k8s-dev",
-      "secrets/data/kubeconfig/homelab-k8s-prod"
+      "secrets/data/kubeconfig/dev-k8s",
+      "secrets/data/kubeconfig/prod-k8s",
+      "secrets/data/tailscale/github-actions"
     ]
   }
   "tenzin-io/actions-runner-images" = {
