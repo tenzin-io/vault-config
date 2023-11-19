@@ -18,9 +18,11 @@ resource "vault_ssh_secret_backend_role" "ssh_user" {
   backend       = vault_mount.ssh.path
   key_type      = "ca"
   default_extensions = {
-    "permit-pty"       = "",
-    "agent-forwarding" = "",
-    "port-forwarding"  = ""
+    "permit-pty"              = "",
+    "permit-agent-forwarding" = "",
+    "permit-port-forwarding"  = "",
+    "permit-X11-forwarding"   = "",
+    "permit-user-rc"          = ""
   }
   allow_user_certificates = true
 }
