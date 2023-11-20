@@ -23,7 +23,10 @@ github_repos = {
   "tenzin-io/homelab-k8s-oracle" = {
     secrets = ["secrets/data/cloudflare", "secrets/data/github_app", "secrets/data/kubeconfig/homelab-k8s-oracle"]
   }
-  "tenzin-io/homelab-k8s-dev" = {
-    secrets = ["secrets/data/cloudflare", "secrets/data/github_app", "secrets/data/kubeconfig/homelab-k8s-dev", "secrets/data/xmatters", "secrets/data/grafana-dev", "secrets/data/tailscale"]
+  "tenzin-io/dev-k8s" = {
+    secrets = [
+      "secrets/data/kubeconfig/dev-k8s",
+      "secrets/data/tailscale/github-actions"
+    ]
   }
 }
