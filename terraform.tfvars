@@ -25,6 +25,8 @@ github_repos = {
   }
   "tenzin-io/dev-k8s" = {
     secrets = [
+      "secrets/data/cloudflare",
+      "secrets/data/github_app",
       "secrets/data/kubeconfig/dev-k8s",
       "secrets/data/tailscale/github-actions"
     ]
