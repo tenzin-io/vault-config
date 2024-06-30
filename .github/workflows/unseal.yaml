@@ -1,0 +1,15 @@
+name: Unseal Vault
+
+on:
+  workflow_dispatch:
+
+env:
+  VAULT_ADDR: https://vault.tenzin.io
+
+jobs:
+  unseal-vault:
+    runs-on: [ ubuntu-latest ]
+    steps:
+      - name: Unseal Vault
+        run: |
+          curl --fail --max-time 4 --request PUT --data '{"key": "${{ secrets.VAULT_UNSEAL_KEY }}"}' ${{ env.VAULT_ADDR }}/v1/sys/unseal | jq .
