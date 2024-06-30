@@ -24,7 +24,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::130900203380:role/tenzin-io.homelab-vault-config
+          role-to-assume: arn:aws:iam::130900203380:role/tenzin-io.vault-tenzin-io
           aws-region: us-east-1
 
       - name: Run Terraform Init
@@ -55,7 +55,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::130900203380:role/tenzin-io.homelab-vault-config
+          role-to-assume: arn:aws:iam::130900203380:role/tenzin-io.vault-tenzin-io
           aws-region: us-east-1
 
       - name: Run Terraform Init
