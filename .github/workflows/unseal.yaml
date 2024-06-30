@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Unseal Vault
         run: |
-          curl --fail --max-time 4 --request PUT --data '{"key": "${{ secrets.VAULT_UNSEAL_KEY }}"}' ${{ env.VAULT_ADDR }}/v1/sys/unseal | jq .
+          curl --fail --max-time 4 --request PUT --data '{"key": "${{ secrets.VAULT_UNSEAL_KEY }}"}' ${{ env.VAULT_ADDR }}/v1/sys/unseal | jq . || exit 1
