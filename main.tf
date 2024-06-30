@@ -35,7 +35,8 @@ module "vault_policies" {
       { path = "secrets/data/jupyterhub" },
       { path = "secrets/data/github-actions/tlhakhan" },
       { path = "secrets/data/github-actions/tenzin-io" },
-      { path = "secrets/data/github-actions/tailscale" }
+      { path = "secrets/data/github-actions/tailscale" },
+      { path = "secrets/data/kubeconfig/dev-k8s" },
     ]
   }
 }
