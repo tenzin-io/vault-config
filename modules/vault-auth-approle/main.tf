@@ -19,6 +19,7 @@ resource "vault_approle_auth_backend_role" "app" {
   backend               = vault_auth_backend.approle.path
   role_name             = each.key
   token_policies        = each.value.policies
+  bind_secret_id        = false
   secret_id_bound_cidrs = concat(var.global_bound_cidrs, each.value.bound_cidrs)
 }
 
