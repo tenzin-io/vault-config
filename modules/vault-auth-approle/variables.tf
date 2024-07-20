@@ -6,7 +6,7 @@ variable "mount_path" {
 
 variable "description" {
   type        = string
-  default     = "The approle authentication method"
+  default     = "The AppRole authentication method"
   description = "The description of the authentication method"
 }
 

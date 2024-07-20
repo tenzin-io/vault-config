@@ -22,7 +22,7 @@ A Terraform module to setup the AppRole authentication method in a Vault instanc
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_allowed_apps"></a> [allowed\_apps](#input\_allowed\_apps) | A map of allowed apps that can login to Vault | <pre>map(object({<br>    bound_cidrs = optional(list(string), [])<br>    policies    = set(string)<br>  }))</pre> | n/a | yes |
-| <a name="input_description"></a> [description](#input\_description) | The description of the authentication method | `string` | `"The approle authentication method"` | no |
+| <a name="input_description"></a> [description](#input\_description) | The description of the authentication method | `string` | `"The AppRole authentication method"` | no |
 | <a name="input_global_bound_cidrs"></a> [global\_bound\_cidrs](#input\_global\_bound\_cidrs) | The bound\_cidrs at parent scope | `list(string)` | `[]` | no |
 | <a name="input_mount_path"></a> [mount\_path](#input\_mount\_path) | The path to mount the authentication method | `string` | `"approle"` | no |
 <!-- END_TF_DOCS -->

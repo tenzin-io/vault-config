@@ -6,7 +6,7 @@ variable "mount_path" {
 
 variable "description" {
   type    = string
-  default = "The Vault SSH CA dynamic secrets engine"
+  default = "The SSH CA dynamic secrets engine"
 }
 
 variable "key_ttl" {

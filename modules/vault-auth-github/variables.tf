@@ -1,6 +1,6 @@
 variable "description" {
   type    = string
-  default = "The Vault JWT authentication engine for GitHub"
+  default = "The GitHub JWT authentication method"
 }
 
 variable "mount_path" {

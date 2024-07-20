@@ -1,6 +1,6 @@
 variable "description" {
   type    = string
-  default = "The Vault KV version 2 secrets engine"
+  default = "The Vault KV secrets engine"
 }
 
 variable "mount_path" {
