@@ -20,7 +20,9 @@ A Terraform module to setup Vault userpass authentication engine.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_description"></a> [description](#input\_description) | n/a | `string` | `"Vault userpass authentication engine"` | no |
+| <a name="input_description"></a> [description](#input\_description) | n/a | `string` | `"The Userpass authentication method"` | no |
+| <a name="input_mount_path"></a> [mount\_path](#input\_mount\_path) | n/a | `string` | `"userpass"` | no |
+| <a name="input_token_ttl"></a> [token\_ttl](#input\_token\_ttl) | The lifetime of the token | `string` | `"8h"` | no |
 | <a name="input_vault_admin_password"></a> [vault\_admin\_password](#input\_vault\_admin\_password) | n/a | `string` | n/a | yes |
 | <a name="input_vault_admin_policies"></a> [vault\_admin\_policies](#input\_vault\_admin\_policies) | n/a | `set(string)` | n/a | yes |
 | <a name="input_vault_admin_username"></a> [vault\_admin\_username](#input\_vault\_admin\_username) | n/a | `string` | `"admin"` | no |

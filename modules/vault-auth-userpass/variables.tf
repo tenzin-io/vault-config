@@ -5,7 +5,13 @@ variable "mount_path" {
 
 variable "description" {
   type    = string
-  default = "Vault userpass authentication engine"
+  default = "The Userpass authentication method"
+}
+
+variable "token_ttl" {
+  type        = string
+  default     = "8h"
+  description = "The lifetime of the token"
 }
 
 variable "vault_admin_username" {
