@@ -8,7 +8,7 @@ terraform {
   }
   backend "s3" {
     bucket         = "tenzin-io"
-    key            = "terraform/homelab-vault.state"
+    key            = "terraform/vault-tenzin-io.state"
     dynamodb_table = "tenzin-io"
     region         = "us-east-1"
   }
