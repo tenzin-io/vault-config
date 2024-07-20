@@ -24,20 +24,16 @@ module "vault_policies" {
     "vault-admin" = [{
       path         = "*"
       capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+      },
+      {
+        path         = "secrets/data/*"
+        capabilities = ["create", "read", "update", "delete", "list", "sudo"]
     }],
     "github-actions-token" = [{
       path         = "auth/token/create"
       capabilities = ["create", "read", "update", "list"]
     }],
-    "dev-k8s" = [
-      { path = "secrets/data/cloudflare" },
-      { path = "secrets/data/grafana" },
-      { path = "secrets/data/jupyterhub" },
-      { path = "secrets/data/github-actions/tlhakhan" },
-      { path = "secrets/data/github-actions/tenzin-io" },
-      { path = "secrets/data/github-actions/tailscale" },
-      { path = "secrets/data/kubeconfig/dev-k8s" },
-    ]
+    "github-repos" = [{ path = "secrets/data/*" }]
   }
 }
 
@@ -53,7 +49,18 @@ module "vault_auth_github" {
   source = "./modules/vault-auth-github"
   allowed_github_repos = {
     "tenzin-io/test-actions-workflows" = ["github-actions-token"]
-    "tenzin-io/dev-k8s"                = ["github-actions-token", "dev-k8s"]
+    "tenzin-io/dev-k8s"                = ["github-actions-token", "github-repos"]
+  }
+  depends_on = [module.vault_policies]
+}
+
+module "vault_auth_approle" {
+  source             = "./modules/vault-auth-approle"
+  global_bound_cidrs = ["173.76.115.223/32"]
+  allowed_apps = {
+    "my-app-1" = {
+      policies = ["default"]
+    }
   }
   depends_on = [module.vault_policies]
 }
