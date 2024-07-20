@@ -59,7 +59,7 @@ module "vault_auth_approle" {
   global_bound_cidrs = ["192.168.0.0/16"]
   allowed_apps = {
     "my-app-1" = {
-      policies = ["default"]
+      policies    = ["default"]
       bound_cidrs = ["173.76.115.223/32"]
     }
   }
