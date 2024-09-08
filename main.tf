@@ -49,7 +49,7 @@ module "vault_auth_github" {
   source = "./modules/vault-auth-github"
   allowed_github_repos = {
     "tenzin-io/test-actions-workflows" = ["github-actions-token"]
-    "tenzin-io/k8s-cluster"            = ["github-actions-token", "github-repos"]
+    "tenzin-io/k8s-clusters"           = ["github-actions-token", "github-repos"]
   }
   depends_on = [module.vault_policies]
 }
