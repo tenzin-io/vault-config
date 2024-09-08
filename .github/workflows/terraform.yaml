@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 jobs:
-  plan-and-validate:
+  plan-and-apply:
     runs-on: [ ubuntu-latest ]
     steps:
       - uses: actions/checkout@v4
@@ -41,25 +41,6 @@ jobs:
           VAULT_TOKEN: ${{ secrets.VAULT_ROOT_TOKEN }}
           TF_VAR_vault_admin_password: ${{ secrets.VAULT_ADMIN_PASSWORD }}
         run: terraform plan
-
-  apply:
-    needs: [plan-and-validate]
-    runs-on: [ ubuntu-latest ]
-    steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::130900203380:role/tenzin-io.vault-config
-          aws-region: us-east-1
-
-      - name: Run Terraform Init
-        run: terraform init
         
       - name: Run Terraform Apply
         env:
