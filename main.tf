@@ -49,7 +49,7 @@ module "vault_auth_github" {
   source = "./modules/vault-auth-github"
   allowed_github_repos = {
     "tenzin-io/test-actions-workflows" = ["github-actions-token"]
-    "tenzin-io/dev-k8s"                = ["github-actions-token", "github-repos"]
+    "tenzin-io/k8s-cluster"            = ["github-actions-token", "github-repos"]
   }
   depends_on = [module.vault_policies]
 }
@@ -57,13 +57,8 @@ module "vault_auth_github" {
 module "vault_auth_approle" {
   source             = "./modules/vault-auth-approle"
   global_bound_cidrs = ["192.168.0.0/16"]
-  allowed_apps = {
-    "my-app-1" = {
-      policies    = ["default"]
-      bound_cidrs = ["173.76.115.223/32"]
-    }
-  }
-  depends_on = [module.vault_policies]
+  allowed_apps       = {}
+  depends_on         = [module.vault_policies]
 }
 
 module "vault_secrets_kv" {
