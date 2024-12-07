@@ -21,19 +21,15 @@ provider "vault" {
 module "vault_policies" {
   source = "./modules/vault-policies"
   vault_policies = {
-    "vault-admin" = [{
-      path         = "*"
-      capabilities = ["create", "read", "update", "delete", "list", "sudo"]
-      },
-      {
-        path         = "secrets/data/*"
-        capabilities = ["create", "read", "update", "delete", "list", "sudo"]
-    }],
-    "github-actions-token" = [{
-      path         = "auth/token/create"
-      capabilities = ["create", "read", "update", "list"]
-    }],
-    "github-repos" = [{ path = "secrets/data/*" }]
+    "vault-admin" = [
+      { path = "*", capabilities = ["create", "read", "update", "delete", "list", "sudo"] },
+      { path = "secrets/data/*", capabilities = ["create", "read", "update", "delete", "list", "sudo"] }
+    ],
+    "github-repos" = [
+      { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
+      { path = "secrets/data/*" }
+    ]
+    "kubeconfig-publish" = [{ path = "kubernetes-secrets/data/kubeconfig/*", capabilities = ["create", "update"] }]
   }
 }
 
@@ -49,20 +45,28 @@ module "vault_auth_github" {
   source = "./modules/vault-auth-github"
   allowed_github_repos = {
     "tenzin-io/test-actions-workflows" = ["github-actions-token"]
-    "tenzin-io/ansible-playbooks"      = ["github-actions-token", "github-repos"]
+    "tenzin-io/platform-setup"         = ["github-actions-token", "github-repos"]
   }
   depends_on = [module.vault_policies]
 }
 
-module "vault_auth_approle" {
-  source             = "./modules/vault-auth-approle"
-  global_bound_cidrs = ["192.168.0.0/16"]
-  allowed_apps       = {}
-  depends_on         = [module.vault_policies]
-}
+# module "vault_auth_approle" {
+#   source = "./modules/vault-auth-approle"
+#   allowed_apps = {
+#     "kubeconfig-publisher" = ["kubeconfig-publish"]
+#   }
+#   depends_on = [module.vault_policies]
+# }
 
 module "vault_secrets_kv" {
   source       = "./modules/vault-secrets-kv"
+  mount_path   = "secrets"
+  max_versions = 30
+}
+
+module "kubernetes_secrets_kv" {
+  source       = "./modules/vault-secrets-kv"
+  mount_path   = "kubernetes-secrets"
   max_versions = 30
 }
 
@@ -70,4 +74,3 @@ module "vault_secrets_ssh" {
   source    = "./modules/vault-secrets-ssh"
   ssh_users = ["tenzin-bot"]
 }
-
