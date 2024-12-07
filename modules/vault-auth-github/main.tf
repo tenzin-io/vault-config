@@ -23,6 +23,7 @@ resource "vault_jwt_auth_backend_role" "github_repo" {
   bound_audiences = ["https://github.com/${dirname(each.key)}"]
   bound_claims = {
     repository = each.key
+    ref        = "refs/heads/${var.allowed_repo_branch}"
   }
   bound_claims_type = "string"
   user_claim        = "sub"

@@ -22,5 +22,11 @@ variable "bound_issuer" {
 
 variable "allowed_github_repos" {
   type        = map(list(string))
-  description = "A map of GitHub repos and their associated Vault policies"
+  description = "A map of GitHub repos and their associated Vault policies."
+}
+
+variable "allowed_repo_branch" {
+  type        = string
+  default     = "main"
+  description = "The allowed branch from repositories."
 }
