@@ -27,3 +27,13 @@ variable "vault_admin_password" {
 variable "vault_admin_policies" {
   type = set(string)
 }
+
+variable "vault_allowed_users" {
+  type = map(list(string))
+}
+
+variable "vault_secrets_mount_path" {
+  type        = string
+  description = "The mount path to secrets engine to store the vault user credentials"
+  default     = ""
+}

@@ -15,12 +15,12 @@ resource "vault_auth_backend" "approle" {
 }
 
 resource "vault_approle_auth_backend_role" "app" {
-  for_each       = var.allowed_apps
-  backend        = vault_auth_backend.approle.path
-  role_name      = each.key
-  role_id        = sha1(each.key)
-  token_policies = each.value
-  bind_secret_id = false
+  for_each              = var.allowed_apps
+  backend               = vault_auth_backend.approle.path
+  role_name             = each.key
+  role_id               = sha1(each.key)
+  token_policies        = each.value
+  bind_secret_id        = false
   secret_id_bound_cidrs = ["0.0.0.0/0"]
 }
 

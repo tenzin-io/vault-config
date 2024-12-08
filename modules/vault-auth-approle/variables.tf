@@ -11,6 +11,6 @@ variable "description" {
 }
 
 variable "allowed_apps" {
-  type = map(list(string))
+  type        = map(list(string))
   description = "A map of allowed apps that can login to Vault"
 }

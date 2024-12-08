@@ -38,7 +38,11 @@ module "vault_auth_userpass" {
   vault_admin_username = "admin"
   vault_admin_password = var.vault_admin_password
   vault_admin_policies = ["vault-admin"]
-  depends_on           = [module.vault_policies]
+  vault_allowed_users = {
+    "kubeconfig-publisher" = ["kubeconfig-publish"]
+  }
+  vault_secrets_mount_path = module.vault_secrets_kv.mount_path
+  depends_on               = [module.vault_policies]
 }
 
 module "vault_auth_github" {

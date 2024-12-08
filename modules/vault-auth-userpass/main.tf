@@ -20,11 +20,36 @@ resource "vault_auth_backend" "userpass" {
 }
 
 resource "vault_generic_endpoint" "vault_admin" {
-  depends_on           = [vault_auth_backend.userpass]
-  path                 = "auth/userpass/users/${var.vault_admin_username}"
+  path                 = "auth/${vault_auth_backend.userpass.path}/users/${var.vault_admin_username}"
   ignore_absent_fields = true
   data_json = jsonencode({
     policies = var.vault_admin_policies
     password = var.vault_admin_password
+  })
+}
+
+resource "random_password" "vault_user" {
+  for_each = var.vault_allowed_users
+  special  = false
+  length   = 32
+}
+
+resource "vault_kv_secret_v2" "vault_user_credentials" {
+  for_each = length(var.vault_secrets_mount_path) > 0 ? var.vault_allowed_users : {}
+  mount    = var.vault_secrets_mount_path
+  name     = "vault-users/${each.key}"
+  data_json = jsonencode({
+    username = each.key
+    password = random_password.vault_user[each.key].result
+  })
+}
+
+resource "vault_generic_endpoint" "vault_users" {
+  for_each             = var.vault_allowed_users
+  path                 = "auth/${vault_auth_backend.userpass.path}/users/${each.key}"
+  ignore_absent_fields = true
+  data_json = jsonencode({
+    policies = each.value
+    password = random_password.vault_user[each.key].result
   })
 }
