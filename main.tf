@@ -27,7 +27,8 @@ module "vault_policies" {
     ],
     "github-repos" = [
       { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
-      { path = "secrets/data/*" }
+      { path = "secrets/data/*" },
+      { path = "kubernetes-secrets/data/kubeconfig/*", capabilities = ["create", "update"] }
     ]
     "kubeconfig-publish" = [
       { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
