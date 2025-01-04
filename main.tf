@@ -1,5 +1,5 @@
 terraform {
-  required_version = "~> 1.0"
+  required_version = "~> 1.9"
   required_providers {
     vault = {
       source  = "hashicorp/vault"
@@ -7,10 +7,10 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "tenzin-io"
-    key            = "terraform/vault-tenzin-io.state"
-    dynamodb_table = "tenzin-io"
-    region         = "us-east-1"
+    bucket       = "tenzin-cloud"
+    key          = "terraform/vault-tenzin-cloud.tfstate"
+    region       = "us-east-1"
+    use_lockfile = true
   }
 }
 
