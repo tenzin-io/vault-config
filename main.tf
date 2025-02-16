@@ -23,7 +23,7 @@ module "vault_policies" {
   vault_policies = {
     "vault-admin" = [
       { path = "*", capabilities = ["create", "read", "update", "delete", "list", "sudo"] },
-      { path = "secrets/data/*", capabilities = ["create", "read", "update", "delete", "list", "sudo"] }
+      { path = "secrets/data/*", capabilities = ["create", "read", "update", "delete", "list", "sudo"] },
     ],
     "github-repos" = [
       { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
@@ -32,7 +32,11 @@ module "vault_policies" {
     ]
     "kubeconfig-publish" = [
       { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
-      { path = "kubernetes-secrets/data/kubeconfig/*", capabilities = ["create", "update"] }
+      { path = "kubernetes-secrets/data/kubeconfig/*", capabilities = ["create", "update"] },
+    ]
+    "secrets-reader" = [
+      { path = "*", capabilities = ["read", "list"] },
+      { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
     ]
   }
 }
@@ -44,6 +48,7 @@ module "vault_auth_userpass" {
   vault_admin_policies = ["vault-admin"]
   vault_allowed_users = {
     "kubeconfig-publisher" = ["kubeconfig-publish"]
+    "tenzin-bot"           = ["secrets-reader"]
   }
   vault_secrets_mount_path = module.vault_secrets_kv.mount_path
   depends_on               = [module.vault_policies]
