@@ -33,6 +33,7 @@ module "vault_policies" {
     "tenzin-bot" = [
       { path = "secrets/data/docker-hub/tenzinbot", capabilities = ["read", "list"] },
       { path = "secrets/data/cloudflare/tunnels/*", capabilities = ["read", "list"] },
+      { path = "secrets/data/jupyterhub", capabilities = ["read", "list"] },
       { path = "kubernetes-secrets/data/kubeconfig/*", capabilities = ["create", "update"] },
       { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
     ]
