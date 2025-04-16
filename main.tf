@@ -7,8 +7,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket       = "tenzin-cloud"
-    key          = "terraform/vault-tenzin-cloud.tfstate"
+    bucket       = "tenzin-io"
+    key          = "terraform/vault-tenzin-io.tfstate"
     region       = "us-east-1"
     use_lockfile = true
   }
