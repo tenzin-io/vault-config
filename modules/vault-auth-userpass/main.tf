@@ -22,7 +22,10 @@ locals {
       { path = "*", capabilities = toset(["create", "read", "update", "delete", "list", "sudo"]), description = null },
     ]
   }
-  effective_policies = merge(local.default_policies, var.vault_policies)
+  effective_policies = {
+    for name, rules in merge(local.default_policies, var.vault_policies) :
+    "${var.mount_path}-${name}" => rules
+  }
 }
 
 resource "vault_auth_backend" "userpass" {
@@ -82,7 +85,7 @@ resource "vault_generic_endpoint" "vault_users" {
   ignore_absent_fields = true
   depends_on           = [vault_policy.policy]
   data_json = jsonencode({
-    policies = each.value
+    policies = [for p in each.value : "${var.mount_path}-${p}"]
     password = random_password.vault_user[each.key].result
   })
 }
