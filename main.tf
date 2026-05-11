@@ -7,10 +7,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket       = "tenzin-io"
-    key          = "terraform/vault-tenzin-io.tfstate"
-    region       = "us-east-1"
-    use_lockfile = true
+    bucket = "tenzin-io"
+    key    = "terraform/vault-tenzin-io.tfstate"
+    region = "us-east-1"
   }
 }
 
@@ -25,19 +24,19 @@ module "vault_policies" {
       { path = "*", capabilities = ["create", "read", "update", "delete", "list", "sudo"] },
       { path = "secrets/data/*", capabilities = ["create", "read", "update", "delete", "list", "sudo"] },
     ],
-    "github-repos" = [
-      { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
-      { path = "secrets/data/*" },
-      { path = "kubernetes-secrets/data/kubeconfig/*" }
-    ],
-    "tenzin-bot" = [
-      { path = "secrets/data/docker-hub/tenzinbot", capabilities = ["read", "list"] },
-      { path = "secrets/data/cloudflare/tunnels/*", capabilities = ["read", "list"] },
-      { path = "secrets/data/jupyterhub", capabilities = ["read", "list"] },
-      { path = "secrets/data/grafana", capabilities = ["read", "list"] },
-      { path = "kubernetes-secrets/data/kubeconfig/*", capabilities = ["create", "update"] },
-      { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
-    ]
+    # "github-repos" = [
+    #   { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
+    #   { path = "secrets/data/*" },
+    #   { path = "kubernetes-secrets/data/kubeconfig/*" }
+    # ],
+    # "tenzin-bot" = [
+    #   { path = "secrets/data/docker-hub/tenzinbot", capabilities = ["read", "list"] },
+    #   { path = "secrets/data/cloudflare/tunnels/*", capabilities = ["read", "list"] },
+    #   { path = "secrets/data/jupyterhub", capabilities = ["read", "list"] },
+    #   { path = "secrets/data/grafana", capabilities = ["read", "list"] },
+    #   { path = "kubernetes-secrets/data/kubeconfig/*", capabilities = ["create", "update"] },
+    #   { path = "auth/token/create", capabilities = ["create", "read", "update", "list"] },
+    # ]
   }
 }
 
@@ -53,14 +52,14 @@ module "vault_auth_userpass" {
   depends_on               = [module.vault_policies]
 }
 
-module "vault_auth_github" {
-  source = "./modules/vault-auth-github"
-  allowed_github_repos = {
-    "tenzin-io/test-actions-workflows" = ["github-actions-token"]
-    "tenzin-io/platform-setup"         = ["github-actions-token", "github-repos"]
-  }
-  depends_on = [module.vault_policies]
-}
+# module "vault_auth_github" {
+#   source = "./modules/vault-auth-github"
+#   allowed_github_repos = {
+#     "tenzin-io/test-actions-workflows" = ["github-actions-token"]
+#     "tenzin-io/platform-setup"         = ["github-actions-token", "github-repos"]
+#   }
+#   depends_on = [module.vault_policies]
+# }
 
 # module "vault_auth_approle" {
 #   source = "./modules/vault-auth-approle"
@@ -76,13 +75,13 @@ module "vault_secrets_kv" {
   max_versions = 30
 }
 
-module "kubernetes_secrets_kv" {
-  source       = "./modules/vault-secrets-kv"
-  mount_path   = "kubernetes-secrets"
-  max_versions = 30
-}
+# module "kubernetes_secrets_kv" {
+#   source       = "./modules/vault-secrets-kv"
+#   mount_path   = "kubernetes-secrets"
+#   max_versions = 30
+# }
 
-module "vault_secrets_ssh" {
-  source    = "./modules/vault-secrets-ssh"
-  ssh_users = ["tenzin-bot"]
-}
+# module "vault_secrets_ssh" {
+#   source    = "./modules/vault-secrets-ssh"
+#   ssh_users = ["tenzin-bot"]
+# }
