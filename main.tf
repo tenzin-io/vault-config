@@ -19,8 +19,11 @@ provider "vault" {
 
 module "vault_auth_userpass" {
   source = "./modules/vault-auth-userpass"
+  vault_policies = {
+    "transit" = module.vault_secrets_transit.policy_rules
+  }
   vault_allowed_users = {
-    "admin"      = ["admin"]
+    "admin" = ["admin", "transit"]
   }
   vault_secrets_mount_path = module.vault_secrets_kv.mount_path
 }
@@ -29,4 +32,8 @@ module "vault_secrets_kv" {
   source       = "./modules/vault-secrets-kv"
   mount_path   = "secrets"
   max_versions = 30
+}
+
+module "vault_secrets_transit" {
+  source = "./modules/vault-secrets-transit"
 }
